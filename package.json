@@ -1,0 +1,19 @@
+{
+  "name": "zepto-gfx",
+  "version": "0.0.0",
+  "description": "zepto port of gfx with commonjs support",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/shanejonas/zepto-gfx.git"
+  },
+  "keywords": [
+    "zepto",
+    "gfx"
+  ],
+  "author": "Shane Jonas",
+  "license": "NONE"
+}
