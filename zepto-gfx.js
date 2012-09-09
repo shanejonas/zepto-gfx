@@ -5,6 +5,10 @@
     define('zepto-gfx', ['zepto'], function( Zepto ) {
       factory( Zepto );
     });
+  } else if (typeof exports !== 'undefined' && typeof module !== undefined) {
+    // Commonjs
+    var Zepto = require('zeptoify');
+    module.exports = factory(Zepto);
   } else {
     // Browser global scope
     factory( root.Zepto );
@@ -48,7 +52,7 @@
   // Helper function for easily adding transforms.
   $.fn.transform = function (properties) {
     var transforms = [];
-    
+
     for (var key in properties) {
       if (transformTypes.indexOf(key) !== -1) {
         transforms.push(key + '(' + properties[key] + ')');
@@ -66,7 +70,7 @@
   $.fn.gfxPopIn = function (options, cb) {
     var $that = $(this),
         opts = $.extend({}, defaults, options || {});
-        
+
     opts.scale = opts.scale || 0.2;
 
     $that.transform({
@@ -102,9 +106,9 @@
   $.fn.gfxFadeIn = function (options, cb) {
     var $that = $(this),
         opts = $.extend({}, defaults, options || {});
-        
+
     opts.duration = opts.duration || 1000;
-    
+
     $that.css({opacity: 0}).show().animate({opacity: 1}, opts.duration,
       opts.easing, cb);
   };
@@ -112,10 +116,10 @@
   $.fn.gfxFadeOut = function (options, cb) {
     var $that = $(this),
         opts = $.extend({}, defaults, options || {});
-    
+
     $that.css({opacity: 1}).animate({opacity: 0}, opts.duration,
       opts.easing, function () {
-        
+
       $that.hide().css({opacity: 1});
       cb && cb();
     });
@@ -276,5 +280,5 @@
       opacity: opacity}).show().animate({translate3d: '0,0,0',
       opacity: 1}, opts.duration, opts.easing, cb);
   };
-  
+
 }));

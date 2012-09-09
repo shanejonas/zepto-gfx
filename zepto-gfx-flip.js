@@ -5,6 +5,10 @@
     define('zepto-gfx-flip', ['zepto'], function( Zepto ) {
       factory( Zepto );
     });
+  } else if (typeof exports !== 'undefined' && typeof module !== undefined) {
+    // Commonjs
+    var Zepto = require('zeptoify');
+    module.exports = factory(Zepto);
   } else {
     // Browser global scope
     factory( root.Zepto );
@@ -23,7 +27,7 @@
         opts = $.extend({}, defaults, options || {}),
         front = $that.find('.front'),
         back = $that.find('.back');
-        
+
     $that.css({
       'position': 'relative',
       '-webkit-perspective': '600',
@@ -35,7 +39,7 @@
       'width': opts.width,
       'height': opts.height
     });
-    
+
     front.add(back).css({
       position: 'absolute',
       width: '100%',
@@ -44,17 +48,17 @@
       '-webkit-backface-visibility': 'hidden',
       '-moz-backface-visibility': 'hidden'
     });
-    
+
     back.transform({
       rotateY: '-180deg'
     });
-    
+
     $that.bind('flip', function() {
       var frontRotateY, backRotateY;
-      
+
       $that.toggleClass('flipped');
       flipped = $that.hasClass('flipped');
-      
+
       if (flipped) {
         frontRotateY = '180deg';
         backRotateY = '0deg';
@@ -62,7 +66,7 @@
         frontRotateY = '0deg';
         backRotateY = '-180deg';
       }
-      
+
       front.animate({rotateY: frontRotateY},
         opts.duration, opts.easing);
       back.animate({rotateY: backRotateY},
